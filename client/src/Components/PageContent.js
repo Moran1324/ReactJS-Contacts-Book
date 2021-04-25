@@ -1,18 +1,25 @@
 import React from 'react';
-import { Button } from '@material-ui/core';
+import { Button, Grid } from '@material-ui/core';
 import useContactsAPI from '../Hooks/useContactsAPI';
+import Contact from './Contact';
 
 const PageContent = () => {
   const { contacts, loadMoreContacts } = useContactsAPI();
   console.log('contacts', contacts);
   return (
     <>
-      <div>
-        Page Content
-      </div>
-      <Button onClick={loadMoreContacts} variant="contained">
-        Load More...
-      </Button>
+      <Grid container justify="center">
+        {contacts.map((contact) => (
+          <Grid item xs={6} md={4} key={contact.id.value}>
+            <Contact {...contact} />
+          </Grid>
+        ))}
+        <Grid item xs={12}>
+          <Button onClick={loadMoreContacts} variant="contained">
+            Load More...
+          </Button>
+        </Grid>
+      </Grid>
     </>
   );
 };
