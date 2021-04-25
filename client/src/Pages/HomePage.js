@@ -1,14 +1,15 @@
-import React from 'react'
-import NavBar from '../Components/NavBar'
-import PageContent from '../Components/PageContent'
+import React from 'react';
+import NavBar from '../Components/NavBar';
+import PageContent from '../Components/PageContent';
 
 const HomePage = () => {
+  const data = 'data';
   return (
-    <div className='homepage'>
+    <div className="homepage">
       <NavBar />
       <PageContent />
     </div>
-  )
-}
+  );
+};
 
-export default HomePage
+export default HomePage;
