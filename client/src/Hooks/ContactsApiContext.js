@@ -8,6 +8,7 @@ export const ContactsContext = createContext();
 export default function ContactsAPIProvider({ children }) {
   const [contacts, setContacts] = useState([]);
   const [pageNumber, setPageNumber] = useState(1);
+  const [search, setSearch] = useState('');
 
   const contactsUrlPagination = `https://randomuser.me/api/?page=${pageNumber}&results=9&seed=abc&inc=gender,name,phone,cell,picture,email,id`;
 
@@ -23,7 +24,9 @@ export default function ContactsAPIProvider({ children }) {
     setPageNumber((prevPageNumber) => prevPageNumber + 1);
   };
 
-  const value = { contacts, loadMoreContacts };
+  const value = {
+    contacts, loadMoreContacts, search, setSearch,
+  };
 
   return (
     <ContactsContext.Provider value={value}>

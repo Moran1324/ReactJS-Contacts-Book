@@ -8,8 +8,15 @@ import PhoneIphoneIcon from '@material-ui/icons/PhoneIphone';
 import { InlineIcon } from '@iconify/react';
 import genderFemale from '@iconify-icons/mdi/gender-female';
 import genderMale from '@iconify-icons/mdi/gender-male';
+import { makeStyles } from '@material-ui/styles';
 
-const Contact = ({ contact }) => {
+const useStyles = makeStyles({
+  highlight: {
+    backgroundColor: '#FDFF7A',
+  },
+});
+
+const Contact = ({ contact, highlight }) => {
   const {
     cell, email, gender, name, phone, picture,
   } = contact;
@@ -19,8 +26,10 @@ const Contact = ({ contact }) => {
     female: genderFemale,
   };
 
+  const classes = useStyles();
+
   return (
-    <Card raised>
+    <Card raised className={highlight && classes.highlight}>
       <CardHeader
         avatar={
           <Avatar src={picture.thumbnail} alt={`${name.title} ${name.first} ${name.last}`} />

@@ -3,8 +3,8 @@ import {
   AppBar, Toolbar, Typography, InputBase,
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
-
 import SearchIcon from '@material-ui/icons/Search';
+import useContactsAPI from '../Hooks/useContactsAPI';
 
 const useStyles = makeStyles({
   search: {
@@ -52,6 +52,8 @@ const useStyles = makeStyles({
 const NavBar = () => {
   const classes = useStyles();
 
+  const { search, setSearch } = useContactsAPI();
+
   return (
     <div className={classes.root}>
       <AppBar position="sticky">
@@ -67,6 +69,8 @@ const NavBar = () => {
                 input: classes.inputInput,
               }}
               inputProps={{ 'aria-label': 'search' }}
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
             />
             <div className={classes.searchIcon}>
               <SearchIcon />
