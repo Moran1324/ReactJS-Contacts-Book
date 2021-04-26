@@ -17,8 +17,15 @@ export default function ContactsAPIProvider({ children }) {
   useEffect(() => {
     const getContacts = async () => {
       const { data } = await axios.get(contactsUrlPagination);
-      setContacts((prevState) => [...prevState, ...data.results]);
-      setContactsBackup((prevState) => [...prevState, ...data.results]);
+      if (filter === 'all') {
+        setContacts((prevState) => [...prevState, ...data.results]);
+        setContactsBackup((prevState) => [...prevState, ...data.results]);
+      } else {
+        setContacts((prevState) => [...prevState, ...data.results
+          .filter((contact) => contact.gender === filter)]);
+        setContactsBackup((prevState) => [...prevState, ...data.results]);
+      }
+      console.log('contacts', contacts);
     };
     getContacts();
   }, [pageNumber]);
@@ -40,7 +47,7 @@ export default function ContactsAPIProvider({ children }) {
   }, [filter]);
 
   const value = {
-    contacts, loadMoreContacts, search, setSearch,
+    contacts, loadMoreContacts, search, setSearch, filter, setFilter,
   };
 
   return (
