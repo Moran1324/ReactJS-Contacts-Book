@@ -29,7 +29,7 @@ const Contact = ({ contact, highlight }) => {
   const classes = useStyles();
 
   return (
-    <Card raised className={highlight && classes.highlight}>
+    <Card raised className={highlight ? classes.highlight : null}>
       <CardHeader
         avatar={
           <Avatar src={picture.thumbnail} alt={`${name.title} ${name.first} ${name.last}`} />

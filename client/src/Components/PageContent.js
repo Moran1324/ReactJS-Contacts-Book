@@ -10,6 +10,7 @@ const PageContent = () => {
     <>
       <Grid container justify="center" spacing={3}>
         {contacts.map((contact) => {
+          // search functionallity
           let appearsInSearch = false;
           const fullName = `${contact.name.first} ${contact.name.last}`;
 

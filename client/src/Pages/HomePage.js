@@ -9,11 +9,11 @@ const HomePage = () => {
     <div className="homepage">
       <NavBar />
       <Grid container>
-        <Grid item xs={0} sm={1} />
+        <Grid item xs={false} sm={1} />
         <Grid item xs={12} sm={10}>
           <PageContent />
         </Grid>
-        <Grid item xs={0} sm={1} />
+        <Grid item xs={false} sm={1} />
       </Grid>
     </div>
   );
