@@ -6,7 +6,7 @@ import Contact from './Contact';
 
 const useStyles = makeStyles({
   root: {
-    margin: '0px 8px',
+    margin: '64px 8px 0px 8px',
   },
 });
 

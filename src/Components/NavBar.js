@@ -79,7 +79,7 @@ const NavBar = () => {
 
   return (
     <div className={classes.root}>
-      <AppBar position="sticky">
+      <AppBar position="fixed">
         <Toolbar>
           <Typography variant="h6" noWrap className={classes.logoText}>
             {isMobile ? 'Contacts' : 'Contact Book'}
