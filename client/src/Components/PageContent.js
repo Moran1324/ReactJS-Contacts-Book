@@ -40,7 +40,7 @@ const PageContent = () => {
             appearsInSearch = false;
           }
           return (
-            <Grid item xs={6} md={4} key={contact.id.value ? contact.id.value : Math.random()}>
+            <Grid item xs={11} md={4} key={contact.id.value ? contact.id.value : Math.random()}>
               <Contact contact={contact} highlight={appearsInSearch} />
             </Grid>
           );

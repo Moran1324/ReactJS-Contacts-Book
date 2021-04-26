@@ -9,10 +9,39 @@ import { InlineIcon } from '@iconify/react';
 import genderFemale from '@iconify-icons/mdi/gender-female';
 import genderMale from '@iconify-icons/mdi/gender-male';
 import { makeStyles } from '@material-ui/styles';
+import { isMobile } from 'react-device-detect';
 
 const useStyles = makeStyles({
   highlight: {
     backgroundColor: '#FDFF7A',
+  },
+  cardHeader: {
+    display: 'flex',
+    flexDirection: 'column',
+    paddingBottom: '0px',
+  },
+  avatar: {
+    width: isMobile ? '72px' : '96px',
+    height: isMobile ? '72px' : '96px',
+    marginBottom: '8px',
+  },
+  cardContent: {
+    color: 'gray',
+    textAlign: 'left',
+    alignItems: 'center',
+    paddingTop: '0px',
+  },
+  contactDetail: {
+    fontSize: '1.2rem',
+    margin: '8px 0px',
+  },
+  contentIcon: {
+    fontSize: '1rem',
+    margin: '0px 8px',
+  },
+  contactName: {
+    fontSize: '2rem',
+    fontWeight: 'bolder',
   },
 });
 
@@ -32,10 +61,10 @@ const Contact = ({ contact, highlight }) => {
     <Card raised className={highlight ? classes.highlight : null}>
       <CardHeader
         avatar={
-          <Avatar src={picture.thumbnail} alt={`${name.title} ${name.first} ${name.last}`} />
+          <Avatar className={classes.avatar} src={picture.thumbnail} alt={`${name.title} ${name.first} ${name.last}`} />
         }
         title={(
-          <Typography variant="h5">
+          <Typography className={classes.contactName} variant="h4">
             {name.first}
             {' '}
             {name.last}
@@ -43,18 +72,19 @@ const Contact = ({ contact, highlight }) => {
             <InlineIcon icon={genderIcon[gender]} />
           </Typography>
         )}
+        className={classes.cardHeader}
       />
-      <CardContent>
-        <Typography>
-          <SvgIcon component={MailIcon} />
+      <CardContent className={classes.cardContent}>
+        <Typography className={classes.contactDetail}>
+          <SvgIcon className={classes.contentIcon} component={MailIcon} />
           {email}
         </Typography>
-        <Typography>
-          <SvgIcon component={PhoneIcon} />
+        <Typography className={classes.contactDetail}>
+          <SvgIcon className={classes.contentIcon} component={PhoneIcon} />
           {phone}
         </Typography>
-        <Typography>
-          <SvgIcon component={PhoneIphoneIcon} />
+        <Typography className={classes.contactDetail}>
+          <SvgIcon className={classes.contentIcon} component={PhoneIphoneIcon} />
           {cell}
         </Typography>
       </CardContent>
