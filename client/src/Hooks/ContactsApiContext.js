@@ -25,7 +25,6 @@ export default function ContactsAPIProvider({ children }) {
           .filter((contact) => contact.gender === filter)]);
         setContactsBackup((prevState) => [...prevState, ...data.results]);
       }
-      console.log('contacts', contacts);
     };
     getContacts();
   }, [pageNumber]);

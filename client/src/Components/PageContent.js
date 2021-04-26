@@ -1,13 +1,22 @@
 import React from 'react';
 import { Button, Grid } from '@material-ui/core';
+import { makeStyles } from '@material-ui/styles';
 import useContactsAPI from '../Hooks/useContactsAPI';
 import Contact from './Contact';
 
+const useStyles = makeStyles({
+  root: {
+    margin: '0px 8px',
+  },
+});
+
 const PageContent = () => {
   const { contacts, loadMoreContacts, search } = useContactsAPI();
-  console.log('contacts', contacts);
+
+  const classes = useStyles();
+
   return (
-    <>
+    <div className={classes.root}>
       <Grid container justify="center" spacing={3}>
         {contacts.map((contact) => {
           // search functionallity
@@ -42,7 +51,7 @@ const PageContent = () => {
           </Button>
         </Grid>
       </Grid>
-    </>
+    </div>
   );
 };
 

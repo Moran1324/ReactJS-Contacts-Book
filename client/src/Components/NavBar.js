@@ -1,9 +1,10 @@
 import React from 'react';
 import {
-  AppBar, Toolbar, Typography, InputBase,
+  AppBar, Toolbar, Typography, InputBase, Select, InputLabel,
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
 import SearchIcon from '@material-ui/icons/Search';
+import { isMobile } from 'react-device-detect';
 import useContactsAPI from '../Hooks/useContactsAPI';
 
 const useStyles = makeStyles({
@@ -14,9 +15,9 @@ const useStyles = makeStyles({
     '&:hover': {
       backgroundColor: '#6A75B5',
     },
-    marginRight: '16px',
-    marginLeft: '16px',
-    maxWidth: '50%',
+    marginRight: isMobile ? 'auto' : '16px',
+    marginLeft: isMobile ? 'auto' : '16px',
+    maxWidth: isMobile ? '35%' : '50%',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
@@ -45,21 +46,43 @@ const useStyles = makeStyles({
     marginBottom: '16px',
   },
   logoText: {
-    marginRight: '25vw',
+    marginRight: isMobile ? '0px' : '25vw',
+    overflow: 'visible',
+  },
+  filterSelectContainer: {
+
+  },
+  filterSelect: {
+    color: 'white',
+    // color: '#9DA6D4',
+    // backgroundColor: '#5765B5',
+  },
+  selectOption: {
+    color: 'black',
   },
 });
 
 const NavBar = () => {
   const classes = useStyles();
 
-  const { search, setSearch } = useContactsAPI();
+  const {
+    search, setSearch, filter, setFilter,
+  } = useContactsAPI();
+
+  const handleSearchInputChange = (value) => {
+    setSearch(value);
+  };
+
+  const handleFilterChange = (value) => {
+    setFilter(value);
+  };
 
   return (
     <div className={classes.root}>
       <AppBar position="sticky">
         <Toolbar>
           <Typography variant="h6" noWrap className={classes.logoText}>
-            Contact Book
+            {isMobile ? 'Contacts' : 'Contact Book'}
           </Typography>
           <div className={classes.search}>
             <InputBase
@@ -70,11 +93,28 @@ const NavBar = () => {
               }}
               inputProps={{ 'aria-label': 'search' }}
               value={search}
-              onChange={(e) => setSearch(e.target.value)}
+              onChange={(e) => handleSearchInputChange(e.target.value)}
             />
             <div className={classes.searchIcon}>
               <SearchIcon />
             </div>
+          </div>
+          <div className={classes.filterSelectContainer}>
+            <Select
+              className={classes.filterSelect}
+              native
+              value={filter}
+              onChange={(e) => handleFilterChange(e.target.value)}
+              defaultValue="all"
+              inputProps={{
+                name: 'gender',
+                id: 'gender-native-simple',
+              }}
+            >
+              <option className={classes.selectOption} value="all">All Genders</option>
+              <option className={classes.selectOption} value="male">Male</option>
+              <option className={classes.selectOption} value="female">Female</option>
+            </Select>
           </div>
         </Toolbar>
       </AppBar>
