@@ -7,8 +7,10 @@ export const ContactsContext = createContext();
 
 export default function ContactsAPIProvider({ children }) {
   const [contacts, setContacts] = useState([]);
+  const [contactsBackup, setContactsBackup] = useState([]);
   const [pageNumber, setPageNumber] = useState(1);
   const [search, setSearch] = useState('');
+  const [filter, setFilter] = useState('all');
 
   const contactsUrlPagination = `https://randomuser.me/api/?page=${pageNumber}&results=9&seed=abc&inc=gender,name,phone,cell,picture,email,id`;
 
@@ -16,6 +18,7 @@ export default function ContactsAPIProvider({ children }) {
     const getContacts = async () => {
       const { data } = await axios.get(contactsUrlPagination);
       setContacts((prevState) => [...prevState, ...data.results]);
+      setContactsBackup((prevState) => [...prevState, ...data.results]);
     };
     getContacts();
   }, [pageNumber]);
@@ -23,6 +26,18 @@ export default function ContactsAPIProvider({ children }) {
   const loadMoreContacts = () => {
     setPageNumber((prevPageNumber) => prevPageNumber + 1);
   };
+
+  useEffect(() => {
+    if (filter === 'all' && contacts.length !== contactsBackup.length) {
+      setContacts(contactsBackup);
+    }
+    if (filter === 'male') {
+      setContacts(contactsBackup.filter((contact) => contact.gender === 'male'));
+    }
+    if (filter === 'female') {
+      setContacts(contactsBackup.filter((contact) => contact.gender === 'female'));
+    }
+  }, [filter]);
 
   const value = {
     contacts, loadMoreContacts, search, setSearch,
