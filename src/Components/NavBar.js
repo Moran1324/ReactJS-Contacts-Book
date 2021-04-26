@@ -105,7 +105,7 @@ const NavBar = () => {
               native
               value={filter}
               onChange={(e) => handleFilterChange(e.target.value)}
-              defaultValue="all"
+              // defaultValue="all"
               inputProps={{
                 name: 'gender',
                 id: 'gender-native-simple',
