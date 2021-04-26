@@ -5,12 +5,12 @@ import Contact from './Contact';
 
 const PageContent = () => {
   const { contacts, loadMoreContacts } = useContactsAPI();
-  console.log('contacts', contacts);
+  console.log('contacts', contacts.map((contact) => contact.id));
   return (
     <>
       <Grid container justify="center" spacing={3}>
         {contacts.map((contact) => (
-          <Grid item xs={6} md={4} key={contact.id.value}>
+          <Grid item xs={6} md={4} key={contact.id.value ? contact.id.value : Math.random()}>
             <Contact contact={contact} />
           </Grid>
         ))}
