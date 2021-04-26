@@ -8,10 +8,10 @@ const PageContent = () => {
   console.log('contacts', contacts);
   return (
     <>
-      <Grid container justify="center">
+      <Grid container justify="center" spacing={3}>
         {contacts.map((contact) => (
           <Grid item xs={6} md={4} key={contact.id.value}>
-            <Contact {...contact} />
+            <Contact contact={contact} />
           </Grid>
         ))}
         <Grid item xs={12}>
